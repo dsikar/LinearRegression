@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage{amsthm,amssymb}
+\usepackage{amsmath}
+\usepackage{witharrows}
+\begin{document}
+
+\section*{Linear Regression Sanity Check}
+INM431 - daniel.sikar@city.ac.uk  
+
+
+We want to predict a linear trend
+$$
+y = b + mx
+$$
+where $b$ is the intercept, and $m$ is the slope. 
+We change this into the form:
+$$
+\hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}}x
+$$
+We define an error function:
+$$ 
+E = \sum_{i=1}^{n} (y_i - \hat{y_i})^2 
+$$
+where $y_i$ is the $i$th observation of the random variable $Y$ , and corresponds to the input $x_i$. In class we had a $\frac{1}{2}$ coefficient added "for convenience". I omit it here, and demonstrate later that it should give us the same result.
+Our goal is to find values for $\hat{\beta_{0}}$ and $\hat{\beta_{1}}$ that minimize the $SSE$ sum of square errors.
+Substituting the value of $\hat{y}$ into the equation we see that $SSE$ can be viewed as a function of $\hat{\beta_{0}}$ and $\hat{\beta_{1}}$:
+$$
+SSE(\hat{\beta_0},\hat{\beta_1}) = \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 
+$$
+Notice the sign change as we are subtracting the prediction $\hat{y_i}$.
+We take two derivatives, one with respect to $\hat{\beta_0}$ and the other with respect to $\hat{\beta_1}$. Since we are dealing with two functions, on outside function (exponentiation) and the inside function, we apply the chain rule for a general case $g(f(x))$:
+$$
+\frac{\partial g}{\partial f}\cdot\frac{\partial f}{\partial x}
+$$
+For $\hat{\beta_0}$ we have:
+$$
+\frac{\partial g}{\partial f}\cdot\frac{\partial f} {\partial \hat{\beta_0}} = 
+\frac{\partial g}{\partial f} \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \cdot \frac{\partial f} {\hat{\beta_0}} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)
+$$
+We apply the derivative sum rule - the derivative of the sum is equal to the sum of the derivatives and solve, then the equation equal zero:
+
+% Partial derivatives with respect to beta 0
+
+\begin{align*}
+\frac{\partial g}{\partial f}\cdot\frac{\partial f} {\partial \hat{\beta_0}} & = 
+\sum_{i=1}^{n} \frac{\partial g}{\partial f} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \cdot \frac{\partial f} {\partial \hat{\beta_0}} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \\
+& = 2 \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \cdot 
+(-1) \\
+& =  -2\sum_{i=1}^{n}y_i  + 2\sum_{i=1}^{n}\hat{\beta_{0}} + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i
+\end{align*}
+Since we are trying to minimize:
+$$
+\frac{\partial}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
+$$
+We obtain
+\begin{gather*}
+ -2\sum_{i=1}^{n}y_i  + 2\sum_{i=1}^{n}\hat{\beta_{0}} + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i  = 0 \\
+2 \sum_{i=1}^{n} \hat{\beta_{0}}  = 2\sum_{i=1}^{n}y_i    - 2\sum_{i=1}^{n} \hat{\beta_{1}}x_i
+\end{gather*}
+We now see that by multiplying both sides of the equation by $\frac{1}{2}$ we reach the same form had we started with the error function given in class, hence the "convenience":
+
+$$
+\sum_{i=1}^{n} \hat{\beta_{0}}  = \sum_{i=1}^{n}y_i   - \sum_{i=1}^{n} \hat{\beta_{1}}x_i
+$$
+Now comes another interesting bit, by multiplying both sides of the equation by $\frac{1}{n}$ we get:
+$$
+\frac{1}{n}\sum_{i=1}^{n} \hat{\beta_{0}}  =   \frac{1}{n}\sum_{i=1}^{n}y_i  - \frac{1}{n} \sum_{i=1}^{n} \hat{\beta_{1}}x_i
+$$
+which simplifies to:
+% EQUATION 1
+\begin{equation}
+\hat{\beta_0} =  \bar{y} - \hat{\beta_1}\bar{x} \\ \label{eq:1}
+\end{equation}
+
+% Partial derivatives with respect to beta 1
+
+\begin{align*}
+\frac{\partial g}{\partial f}\cdot\frac{\partial f} {\partial \hat{\beta_1}} & = 
+\sum_{i=1}^{n} \frac{\partial g}{\partial f} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \cdot \frac{\partial f} {\partial \hat{\beta_1}} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \\
+& = 2 \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \cdot 
+(-x_i) \\
+& =  -2\sum_{i=1}^{n}y_i x_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2
+\end{align*}
+Since we are trying to minimize:
+$$
+\frac{\partial}{\partial \hat{\beta_1}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
+$$
+We get:
+\begin{align*}
+-2\sum_{i=1}^{n}y_i x_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
+-\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\hat{\beta_{0}}x_i + \sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
+-\sum_{i=1}^{n}y_i x_i + \hat{\beta_{0}}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2 & = 0 \\
+\end{align*}
+Since we have $\hat{\beta_0}$ from $(1)$, by substitution:
+\begin{gather*}
+-\sum_{i=1}^{n}y_i x_i + (\bar{y} - \hat{\beta_1}\bar{x})\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
+-\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}\bar{x}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
+-\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2)  = 0 \\
+\hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2) = -\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i \\
+\hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2) =  \bar{y}\sum_{i=1}^{n}x_i 
+- \sum_{i=1}^{n}y_i x_i \\
+\hat{\beta_1}=  \frac{\bar{y}\sum_{i=1}^{n}x_i 
+- \sum_{i=1}^{n}y_i x_i}{\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2}  \\
+\end{gather*}
+Transforming summations into product of number of terms by mean:
+\begin{gather*}
+\hat{\beta_1}=  \frac{\bar{y}n\bar{x} 
+- \sum_{i=1}^{n}y_i x_i}{\bar{x}n\bar{x} - \sum_{i=1}^{n}x_i^2}  \\
+\hat{\beta_1}=  \frac{n\bar{y}\bar{x} 
+- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2}
+\end{gather*}
+%Adjusting the signs:
+%\begin{gather*}
+%\hat{\beta_1}=  \frac{n\bar{y}\bar{x} 
+%- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \cdot \frac{-1}{-1 } %\\
+%\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - %n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
+%\end{gather*}
+Reworking the nominator:
+\begin{align*}
+-\sum_{i=1}^{n}  y_i x_i + n\bar{y}\bar{x} & = -\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
+& = \sum_{i=1}^{n}y_i x_i - 2\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
+& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
+& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i \sum_{i=1}^{n}x_i - \sum_{i=1}^{n}y_i \sum_{i=1}^{n}x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
+& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}x_i \bar{y} - \sum_{i=1}^{n}\bar{x}y_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
+& = \sum_{i=1}^{n}\big(y_i x_i - x_i \bar{y} - \bar{x}y_i + \bar{y}\bar{x}\big) \\
+& = \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) \\
+\end{align*}
+Substituting:
+$$
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2}
+$$
+% Reworking the denominator:
+% https://www.youtube.com/watch?v=DFBzjihhgBk
+% For summation algebra see http://www.statpower.net/Content/310/Summation%20Algebra.pdf
+
+\begin{align*}
+n\bar{x}^2 - \sum_{i=1}^{n}x_i^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x}^2 \\
+& = \sum_{i=1}^{n}x_i^2 - 2\bar{x}n\bar{x} + n\bar{x}^2 \\
+% \bar{x} \xrightarrow{} \sum_{i=1}^{n}x_i \\
+& = \sum_{i=1}^{n}x_i^2 - 2\bar{x}\sum_{i=1}^{n}x_i + n\bar{x}^2 \\
+& = \sum_{i=1}^{n}x_i^2 - \sum_{i=1}^{n}2x_i\bar{x} + n\bar{x}^2 \\
+& = \sum_{i=1}^{n}x_i^2 - \sum_{i=1}^{n}2x_i\bar{x} + \sum_{i=1}^{n}\bar{x}^2 \\
+& = \sum_{i=1}^{n}\big(x_i^2 - 2x_i\bar{x} + \bar{x}^2\big) \\
+& = \sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2 \\
+\end{align*}
+
+
+\end{document}
