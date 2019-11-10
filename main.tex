@@ -121,14 +121,14 @@ $$
 %\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - %n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
 %\end{gather*}
 %%%%%%%%%%%%%%
-% EQUATION 1 %
+% EQUATION 2 %
 %%%%%%%%%%%%%%
 \begin{equation}
 \hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2} \\ \label{eq:2}
 \end{equation}
 
 
-Reworking the nominator:
+Removing n term from nominator:
 \begin{align*}
 \sum_{i=1}^{n}  x_i y_i - n\bar{x}\bar{y} & = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + n\bar{x}\bar{y} \\ %1
 n\bar{x}\bar{y} = \sum_{1=1}^{n}\bar{x}\bar{y} \\ %2 
@@ -146,10 +146,13 @@ n\bar{x}\bar{y} = \sum_{1=1}^{n}\bar{x}\bar{y} \\ %2
 & = \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) \\
 \end{align*}
 % Substitution nominator
-Substituting:
-$$
-\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
-$$
+Substituting in (2):
+%%%%%%%%%%%%%%
+% EQUATION 3 %
+%%%%%%%%%%%%%%
+\begin{equation}
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}  \label{eq:3}
+\end{equation}
 
 % Reworking the denominator:
 % https://www.youtube.com/watch?v=DFBzjihhgBk
@@ -169,10 +172,12 @@ n\bar{x} = \sum_{1=1}^{n}x_i \\ %3
 \end{align*}
 % Expression with values and means only
 % Substitution denominator
-Substituting:
-$$
-\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2}
-$$
-
+Substituting in (3):
+%%%%%%%%%%%%%%
+% EQUATION 4 %
+%%%%%%%%%%%%%%
+\begin{equation}
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2}  \label{eq:4}
+\end{equation}
 
 \end{document}
