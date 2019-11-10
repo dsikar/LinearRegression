@@ -67,7 +67,9 @@ $$
 \frac{1}{n}\sum_{i=1}^{n} \hat{\beta_{0}}  =   \frac{1}{n}\sum_{i=1}^{n}y_i  - \frac{1}{n} \sum_{i=1}^{n} \hat{\beta_{1}}x_i
 $$
 which simplifies to:
-% EQUATION 1
+%%%%%%%%%%%%%%
+% EQUATION 1 %
+%%%%%%%%%%%%%%
 \begin{equation}
 \hat{\beta_0} =  \bar{y} - \hat{\beta_1}\bar{x} \\ \label{eq:1}
 \end{equation}
@@ -109,33 +111,55 @@ Transforming summations into product of number of terms by mean:
 \hat{\beta_1}=  \frac{n\bar{y}\bar{x} 
 - \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2}
 \end{gather*}
-%Adjusting the signs:
+Adjusting the signs:
 %\begin{gather*}
-%\hat{\beta_1}=  \frac{n\bar{y}\bar{x} 
-%- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \cdot \frac{-1}{-1 } %\\
+$$
+\hat{\beta_1} =  \frac{n\bar{y}\bar{x} 
+- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \cdot \frac{-1}{-1 } 
+$$
+% EQUATION 2
 %\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - %n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
 %\end{gather*}
+%%%%%%%%%%%%%%
+% EQUATION 1 %
+%%%%%%%%%%%%%%
+\begin{equation}
+\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2} \\ \label{eq:2}
+\end{equation}
+
+
 Reworking the nominator:
 \begin{align*}
--\sum_{i=1}^{n}  y_i x_i + n\bar{y}\bar{x} & = -\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
-& = \sum_{i=1}^{n}y_i x_i - 2\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
-& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
-& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}y_i \sum_{i=1}^{n}x_i - \sum_{i=1}^{n}y_i \sum_{i=1}^{n}x_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
-& = \sum_{i=1}^{n}y_i x_i - \sum_{i=1}^{n}x_i \bar{y} - \sum_{i=1}^{n}\bar{x}y_i + \sum_{i=1}^{n}\bar{y}\bar{x} \\
-& = \sum_{i=1}^{n}\big(y_i x_i - x_i \bar{y} - \bar{x}y_i + \bar{y}\bar{x}\big) \\
+\sum_{i=1}^{n}  x_i y_i - n\bar{x}\bar{y} & = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + n\bar{x}\bar{y} \\ %1
+n\bar{x}\bar{y} = \sum_{1=1}^{n}\bar{x}\bar{y} \\ %2 
+& = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %3
+& = \sum_{i=1}^{n}x_i y_i - \bar{x}n\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %4
+ \bar{y} = \frac{\sum_{1=1}^{n}y_i}{n} \\ %5
+& = \sum_{i=1}^{n}x_i y_i - \bar{x}n\frac{\sum_{1=1}^{n}y_i}{n} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %6
+& = \sum_{i=1}^{n}x_i y_i - \bar{x}\sum_{1=1}^{n}y_i - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %7
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %8
+ \bar{x} = \frac{\sum_{1=1}^{n}x_i}{n} \\ %9  
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - n\frac{\sum_{1=1}^{n}x_i}{n}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %10 
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - \sum_{1=1}^{n}x_i\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11   
+% last two steps
+& = \sum_{i=1}^{n}\big(x_i y_i - \bar{x}y_i - x_i \bar{y} + \bar{x}\bar{y}\big) \\ %12
 & = \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) \\
 \end{align*}
+% Substitution nominator
 Substituting:
 $$
-\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2}
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
 $$
+
 % Reworking the denominator:
 % https://www.youtube.com/watch?v=DFBzjihhgBk
 % For summation algebra see http://www.statpower.net/Content/310/Summation%20Algebra.pdf
-
+% denominator
+Removing n term from denominator:
 \begin{align*}
-n\bar{x}^2 - \sum_{i=1}^{n}x_i^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x}^2 \\
-& = \sum_{i=1}^{n}x_i^2 - 2\bar{x}n\bar{x} + n\bar{x}^2 \\
+\sum_{i=1}^{n}x_i^2 - n\bar{x}^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x}^2 \\ %1
+& = \sum_{i=1}^{n}x_i^2 - 2\bar{x}n\bar{x} + n\bar{x}^2 \\ %2
+n\bar{x} = \sum_{1=1}^{n}x_i \\ %3
 % \bar{x} \xrightarrow{} \sum_{i=1}^{n}x_i \\
 & = \sum_{i=1}^{n}x_i^2 - 2\bar{x}\sum_{i=1}^{n}x_i + n\bar{x}^2 \\
 & = \sum_{i=1}^{n}x_i^2 - \sum_{i=1}^{n}2x_i\bar{x} + n\bar{x}^2 \\
@@ -143,6 +167,12 @@ n\bar{x}^2 - \sum_{i=1}^{n}x_i^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x
 & = \sum_{i=1}^{n}\big(x_i^2 - 2x_i\bar{x} + \bar{x}^2\big) \\
 & = \sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2 \\
 \end{align*}
+% Expression with values and means only
+% Substitution denominator
+Substituting:
+$$
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2}
+$$
 
 
 \end{document}
