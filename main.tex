@@ -4,40 +4,49 @@
 \usepackage{witharrows}
 \begin{document}
 
-\section*{Linear Regression Sanity Check}
-INM431 - daniel.sikar@city.ac.uk  
+\section*{Sum of Squared Errors - Sanity Check}
+INM431 week 5 - daniel.sikar@city.ac.uk + big sister
 
-
-We want to predict a linear trend
-$$
-y = b + mx
-$$
-where $b$ is the intercept, and $m$ is the slope. 
+Given a line equation:
+$$y = b + mx$$
+where $b$ is the intercept, and $m$ is the slope.
 We change this into the form:
+%%%%%%%%%%%%%%
+% EQUATION 1 %
+%%%%%%%%%%%%%%
+\begin{equation}
+\hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}}x  \\ \label{eq:1}
+\end{equation}
+and define an error function:
+%%%%%%%%%%%%%%
+% EQUATION 2 %
+%%%%%%%%%%%%%%
+\begin{equation}
+E = \sum_{i=1}^{n} (y_i - \hat{y_i})^2  \\ \label{eq:2}
+\end{equation}
+where $y_i$ is the $i$th observation of $y$, and corresponds to the input $x_i$, and $\hat{y_i}$ is the corresponding prediction. 
+Substituting (1) in (2):
 $$
-\hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}}x
+E = \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 
 $$
-We define an error function:
-$$ 
-E = \sum_{i=1}^{n} (y_i - \hat{y_i})^2 
+We want to minimize the error $E$ and can see it is a function of $\hat{\beta_0}$ and $\hat{\beta_1}$ so give it a more descriptive name:
+%%%%%%%%%%%%%%
+% EQUATION 3 %
+%%%%%%%%%%%%%%
+\begin{equation}
+SSE(\hat{\beta_0},\hat{\beta_1}) = \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \\ \label{eq:3}
+\end{equation}
+
+We take two derivatives, one with respect to $\hat{\beta_0}$ and the other with respect to $\hat{\beta_1}$. Since our error function consists of two functions, one outside function (exponentiation) and one inside function, we apply the chain rule for a general case:
 $$
-where $y_i$ is the $i$th observation of the random variable $Y$ , and corresponds to the input $x_i$. In class we had a $\frac{1}{2}$ coefficient added "for convenience". I omit it here, and demonstrate later that it should give us the same result.
-Our goal is to find values for $\hat{\beta_{0}}$ and $\hat{\beta_{1}}$ that minimize the $SSE$ sum of square errors.
-Substituting the value of $\hat{y}$ into the equation we see that $SSE$ can be viewed as a function of $\hat{\beta_{0}}$ and $\hat{\beta_{1}}$:
-$$
-SSE(\hat{\beta_0},\hat{\beta_1}) = \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 
-$$
-Notice the sign change as we are subtracting the prediction $\hat{y_i}$.
-We take two derivatives, one with respect to $\hat{\beta_0}$ and the other with respect to $\hat{\beta_1}$. Since we are dealing with two functions, on outside function (exponentiation) and the inside function, we apply the chain rule for a general case $g(f(x))$:
-$$
-\frac{\partial g}{\partial f}\cdot\frac{\partial f}{\partial x}
+g(f(x)) = \frac{\partial g}{\partial f}\cdot\frac{\partial f}{\partial x}
 $$
 For $\hat{\beta_0}$ we have:
 $$
 \frac{\partial g}{\partial f}\cdot\frac{\partial f} {\partial \hat{\beta_0}} = 
 \frac{\partial g}{\partial f} \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \cdot \frac{\partial f} {\partial \hat{\beta_0}} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)
 $$
-We apply the derivative sum rule - the derivative of the sum is equal to the sum of the derivatives and solve, then the equation equal zero:
+We apply the derivative sum rule - the derivative of the sum is equal to the sum of the derivatives:
 
 % Partial derivatives with respect to beta 0
 
@@ -50,115 +59,106 @@ We apply the derivative sum rule - the derivative of the sum is equal to the sum
 \end{align*}
 Since we are trying to minimize:
 $$
-\frac{\partial}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
+\frac{\partial}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) \\
 $$
-We obtain
-\begin{gather*}
- -2\sum_{i=1}^{n}y_i  + 2\sum_{i=1}^{n}\hat{\beta_{0}} + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i  = 0 \\
-2 \sum_{i=1}^{n} \hat{\beta_{0}}  = 2\sum_{i=1}^{n}y_i    - 2\sum_{i=1}^{n} \hat{\beta_{1}}x_i
-\end{gather*}
-We now see that by multiplying both sides of the equation by $\frac{1}{2}$ we reach the same form had we started with the error function given in class, hence the "convenience":
-
+we set the result to zero and solve for $\hat{\beta_0}$:
 $$
-\sum_{i=1}^{n} \hat{\beta_{0}}  = \sum_{i=1}^{n}y_i   - \sum_{i=1}^{n} \hat{\beta_{1}}x_i
+ -2\sum_{i=1}^{n}y_i  + 2\sum_{i=1}^{n}\hat{\beta_{0}} + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i  = 0 
 $$
-Now comes another interesting bit, by multiplying both sides of the equation by $\frac{1}{n}$ we get:
-$$
-\frac{1}{n}\sum_{i=1}^{n} \hat{\beta_{0}}  =   \frac{1}{n}\sum_{i=1}^{n}y_i  - \frac{1}{n} \sum_{i=1}^{n} \hat{\beta_{1}}x_i
-$$
-which simplifies to:
+\begin{align*}
+2\sum_{i=1}^{n}\hat{\beta_{0}} & =  2\sum_{i=1}^{n}y_i  -  2\sum_{i=1}^{n}\hat{\beta_{1}}x_i \\
+n\bar{y} = \sum_{i - 1}^{n}y_i \\
+2\sum_{i=1}^{n}\hat{\beta_{0}} & =  2n\bar{y}  -  2\sum_{i=1}^{n}\hat{\beta_{1}}x_i \\
+2\sum_{i=1}^{n}\hat{\beta_{0}} & =  2n\bar{y}  -  \hat{\beta_{1}}2\sum_{i=1}^{n}x_i \\
+n\bar{x} = \sum_{i - 1}^{n}x_i \\
+2\sum_{i=1}^{n}\hat{\beta_{0}} & =  2n\bar{y}  -  \hat{\beta_{1}}2n\bar{x} \\
+2n\hat{\beta_{0}} & =  2n\bar{y}  -  \hat{\beta_{1}}2n\bar{x} \\
+\end{align*}
 %%%%%%%%%%%%%%
-% EQUATION 1 %
+% EQUATION 4 %
 %%%%%%%%%%%%%%
 \begin{equation}
-\hat{\beta_0} =  \bar{y} - \hat{\beta_1}\bar{x} \\ \label{eq:1}
+\hat{\beta_0} =  \bar{y} - \hat{\beta_1}\bar{x} \\ \label{eq:4}
 \end{equation}
 
 % Partial derivatives with respect to beta 1
-
+For $\hat{\beta_1}$ we have:
 \begin{align*}
 \frac{\partial g}{\partial f}\cdot\frac{\partial f} {\partial \hat{\beta_1}} & = 
 \sum_{i=1}^{n} \frac{\partial g}{\partial f} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i)^2 \cdot \frac{\partial f} {\partial \hat{\beta_1}} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \\
 & = 2 \sum_{i=1}^{n} (y_i - \hat{\beta_{0}} - \hat{\beta_{1}}x_i) \cdot 
 (-x_i) \\
-& =  -2\sum_{i=1}^{n}y_i x_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2
+& =  -2\sum_{i=1}^{n}x_i y_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2
 \end{align*}
-Since we are trying to minimize:
-$$
-\frac{\partial}{\partial \hat{\beta_1}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
-$$
-We get:
+Setting result equal to zero:
 \begin{align*}
--2\sum_{i=1}^{n}y_i x_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
--\sum_{i=1}^{n}y_i x_i + \sum_{i=1}^{n}\hat{\beta_{0}}x_i + \sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
--\sum_{i=1}^{n}y_i x_i + \hat{\beta_{0}}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2 & = 0 \\
+-2\sum_{i=1}^{n}x_i y_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
+-\sum_{i=1}^{n}x_i y_i + \sum_{i=1}^{n}\hat{\beta_{0}}x_i + \sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 & = 0 \\
+-\sum_{i=1}^{n}x_i y_i + \hat{\beta_{0}}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2 & = 0 \\
 \end{align*}
-Since we have $\hat{\beta_0}$ from $(1)$, by substitution:
+Substituting $\hat{\beta_0}$ from (1):
 \begin{gather*}
--\sum_{i=1}^{n}y_i x_i + (\bar{y} - \hat{\beta_1}\bar{x})\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
--\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}\bar{x}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
--\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2)  = 0 \\
-\hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2) = -\sum_{i=1}^{n}y_i x_i + \bar{y}\sum_{i=1}^{n}x_i \\
+-\sum_{i=1}^{n}x_i y_i + (\bar{y} - \hat{\beta_1}\bar{x})\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
+-\sum_{i=1}^{n}x_i y_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}\bar{x}\sum_{i=1}^{n}x_i + \hat{\beta_{1}} \sum_{i=1}^{n}x_i^2  = 0 \\
+-\sum_{i=1}^{n}x_i y_i + \bar{y}\sum_{i=1}^{n}x_i - \hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2)  = 0 \\
+\hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2x_i y_i ) = -\sum_{i=1}^{n}x_i y_i  + \bar{y}\sum_{i=1}^{n}x_i \\
 \hat{\beta_1}(\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2) =  \bar{y}\sum_{i=1}^{n}x_i 
-- \sum_{i=1}^{n}y_i x_i \\
-\hat{\beta_1}=  \frac{\bar{y}\sum_{i=1}^{n}x_i 
-- \sum_{i=1}^{n}y_i x_i}{\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2}  \\
+- \sum_{i=1}^{n}x_i y_i \\
 \end{gather*}
-Transforming summations into product of number of terms by mean:
-\begin{gather*}
-\hat{\beta_1}=  \frac{\bar{y}n\bar{x} 
-- \sum_{i=1}^{n}y_i x_i}{\bar{x}n\bar{x} - \sum_{i=1}^{n}x_i^2}  \\
-\hat{\beta_1}=  \frac{n\bar{y}\bar{x} 
-- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2}
-\end{gather*}
-Adjusting the signs:
-%\begin{gather*}
-$$
-\hat{\beta_1} =  \frac{n\bar{y}\bar{x} 
-- \sum_{i=1}^{n}y_i x_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \cdot \frac{-1}{-1 } 
-$$
+\begin{align*}
+\hat{\beta_1} & =  \frac{\bar{y}\sum_{i=1}^{n}x_i 
+- \sum_{i=1}^{n}x_i y_i }{\bar{x}\sum_{i=1}^{n}x_i - \sum_{i=1}^{n}x_i^2}  \\
+\sum_{i - 1}^{n}x_i = n\bar{x}\\
+\hat{\beta_1} & =  \frac{\bar{y}n\bar{x} 
+- \sum_{i=1}^{n}x_i y_i }{\bar{x}n\bar{x} - \sum_{i=1}^{n}x_i^2}  \\
+\hat{\beta_1} & =  \frac{n\bar{y}\bar{x} 
+- \sum_{i=1}^{n}x_i y_i }{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \\
+\hat{\beta_1} & =  \frac{n\bar{y}\bar{x} 
+- \sum_{i=1}^{n}x_i y_i}{n\bar{x}^2 - \sum_{i=1}^{n}x_i^2} \cdot \frac{-1}{-1 } \\
+\end{align*}
 % EQUATION 2
 %\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - %n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}
 %\end{gather*}
 %%%%%%%%%%%%%%
-% EQUATION 2 %
+% EQUATION 5 %
 %%%%%%%%%%%%%%
 \begin{equation}
-\hat{\beta_1} =  \frac{\sum_{i=1}^{n}y_i x_i - n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2} \\ \label{eq:2}
+\hat{\beta_1} =  \frac{\sum_{i=1}^{n}x_i y_i- n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2} \\ \label{eq:5}
 \end{equation}
 
 
-Removing n term from nominator:
+Removing n term from nominator in (5):
 \begin{align*}
 \sum_{i=1}^{n}  x_i y_i - n\bar{x}\bar{y} & = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + n\bar{x}\bar{y} \\ %1
 n\bar{x}\bar{y} = \sum_{1=1}^{n}\bar{x}\bar{y} \\ %2 
 & = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %3
-& = \sum_{i=1}^{n}x_i y_i - \bar{x}n\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %4
- \bar{y} = \frac{\sum_{1=1}^{n}y_i}{n} \\ %5
-& = \sum_{i=1}^{n}x_i y_i - \bar{x}n\frac{\sum_{1=1}^{n}y_i}{n} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %6
-& = \sum_{i=1}^{n}x_i y_i - \bar{x}\sum_{1=1}^{n}y_i - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %7
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %8
- \bar{x} = \frac{\sum_{1=1}^{n}x_i}{n} \\ %9  
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - n\frac{\sum_{1=1}^{n}x_i}{n}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %10 
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}\bar{x}y_i - \sum_{1=1}^{n}x_i\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11   
+% & = \sum_{i=1}^{n}x_i y_i - \bar{x}n\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %4
+\bar{x} = \frac{\sum_{1=1}^{n}x_i}{n} \\ %5
+& = \sum_{i=1}^{n}x_i y_i - n\frac{\sum_{1=1}^{n}x_i}{n}\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %6
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %7
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}n\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %8
+ \bar{y} = \frac{\sum_{1=1}^{n}y_i}{n} \\  %9  
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}n\frac{\sum_{1=1}^{n}y_i}{n} + \sum_{1=1}^{n}\bar{x}\bar{y}  \\ %10 
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}\sum_{1=1}^{n}y_i + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11   
+& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \sum_{1=1}^{n}\bar{x}y_i + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11.   
 % last two steps
-& = \sum_{i=1}^{n}\big(x_i y_i - \bar{x}y_i - x_i \bar{y} + \bar{x}\bar{y}\big) \\ %12
+& = \sum_{i=1}^{n}\big(x_i y_i - x_i \bar{y} - \bar{x}y_i + \bar{x}\bar{y}\big) \\ %12
 & = \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) \\
 \end{align*}
 % Substitution nominator
-Substituting in (2):
+Substituting in (5):
 %%%%%%%%%%%%%%
-% EQUATION 3 %
+% EQUATION 6 %
 %%%%%%%%%%%%%%
 \begin{equation}
-\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}  \label{eq:3}
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}x_i^2 - n\bar{x}^2}  \label{eq:6}
 \end{equation}
 
 % Reworking the denominator:
 % https://www.youtube.com/watch?v=DFBzjihhgBk
 % For summation algebra see http://www.statpower.net/Content/310/Summation%20Algebra.pdf
 % denominator
-Removing n term from denominator:
+Removing n term from denominator in (6):
 \begin{align*}
 \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x}^2 \\ %1
 & = \sum_{i=1}^{n}x_i^2 - 2\bar{x}n\bar{x} + n\bar{x}^2 \\ %2
@@ -172,12 +172,42 @@ n\bar{x} = \sum_{1=1}^{n}x_i \\ %3
 \end{align*}
 % Expression with values and means only
 % Substitution denominator
-Substituting in (3):
+Substituting in (6):
 %%%%%%%%%%%%%%
-% EQUATION 4 %
+% EQUATION 7 %
 %%%%%%%%%%%%%%
 \begin{equation}
-\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2}  \label{eq:4}
+\hat{\beta_1}=  \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n}\big(x_i - \bar{x}\big)^2}  \label{eq:7}
 \end{equation}
+Solving for example given in class:
+\begin{verbatim}
+x = [2 4 10] % average speed on freeway
+y = [75 45 35] % patrol cars deployed
+
+xbar = (2 + 4 + 10) / 3 % 5.33333333333
+ybar = (75 + 45 + 35) / 3 % 51.6666666667
+
+// beta hat subscript 1 ~ slope
+m = ((2 - xbar)(75 - ybar) + ...
+     (4 - xbar)(45 - ybar) + ...
+     (10 - xbar)(35 - ybar)) / ...
+     ((2 - xbar)^2 + (4 - xbar)^2 + (10 - xbar)^2) % -4.23076923077
+     
+// beta hat subscript 0 ~ intercept
+b = ybar - -4.23076923077 * xbar % 74.2307692308
+
+% line of best fit
+% y = 74.2307692308 - 4.23076923077 * x
+
+% prediction y for x = 5
+% y = 53.0769230769mph
+
+% MATLAB solution for b and m
+glmfit([2 4 10], [75 45 35]) % coefficient estimates
+ ans =
+
+   74.2308
+   -4.2308
+\end{verbatim}
 
 \end{document}
