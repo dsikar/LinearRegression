@@ -130,17 +130,17 @@ Substituting $\hat{\beta_0}$ from (4):
 Removing n term from nominator in (5):
 \begin{align*}
 \sum_{i=1}^{n}  x_i y_i - n\bar{x}\bar{y} & = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + n\bar{x}\bar{y} \\ %1
-n\bar{x}\bar{y} = \sum_{1=1}^{n}\bar{x}\bar{y} \\ %2 
-& = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %3
-% & = \sum_{i=1}^{n}x_i y_i - \bar{x}n\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %4
-\bar{x} = \frac{\sum_{1=1}^{n}x_i}{n} \\ %5
-& = \sum_{i=1}^{n}x_i y_i - n\frac{\sum_{1=1}^{n}x_i}{n}\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %6
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - n\bar{x}\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %7
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}n\bar{y} + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %8
- \bar{y} = \frac{\sum_{1=1}^{n}y_i}{n} \\  %9  
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}n\frac{\sum_{1=1}^{n}y_i}{n} + \sum_{1=1}^{n}\bar{x}\bar{y}  \\ %10 
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \bar{x}\sum_{1=1}^{n}y_i + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11   
-& = \sum_{i=1}^{n}x_i y_i - \sum_{1=1}^{n}x_i\bar{y} - \sum_{1=1}^{n}\bar{x}y_i + \sum_{1=1}^{n}\bar{x}\bar{y} \\ %11.   
+n\bar{x}\bar{y} = \sum_{i=1}^{n}\bar{x}\bar{y} \\ %2 
+& = \sum_{i=1}^{n}x_i y_i - n\bar{x}\bar{y} - n\bar{x}\bar{y} + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %3
+% & = \sum_{i=1}^{n}x_i y_i - \bar{x}n\bar{y} - n\bar{x}\bar{y} + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %4
+\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n} \\ %5
+& = \sum_{i=1}^{n}x_i y_i - n\frac{\sum_{i=1}^{n}x_i}{n}\bar{y} - n\bar{x}\bar{y} + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %6
+& = \sum_{i=1}^{n}x_i y_i - \sum_{i=1}^{n}x_i\bar{y} - n\bar{x}\bar{y} + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %7
+& = \sum_{i=1}^{n}x_i y_i - \sum_{i=1}^{n}x_i\bar{y} - \bar{x}n\bar{y} + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %8
+ \bar{y} = \frac{\sum_{i=1}^{n}y_i}{n} \\  %9  
+& = \sum_{i=1}^{n}x_i y_i - \sum_{i=1}^{n}x_i\bar{y} - \bar{x}n\frac{\sum_{i=1}^{n}y_i}{n} + \sum_{i=1}^{n}\bar{x}\bar{y}  \\ %10 
+& = \sum_{i=1}^{n}x_i y_i - \sum_{i=1}^{n}x_i\bar{y} - \bar{x}\sum_{i=1}^{n}y_i + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %11   
+& = \sum_{i=1}^{n}x_i y_i - \sum_{i=1}^{n}x_i\bar{y} - \sum_{i=1}^{n}\bar{x}y_i + \sum_{i=1}^{n}\bar{x}\bar{y} \\ %11.   
 % last two steps
 & = \sum_{i=1}^{n}\big(x_i y_i - x_i \bar{y} - \bar{x}y_i + \bar{x}\bar{y}\big) \\ %12
 & = \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) \\
@@ -162,7 +162,7 @@ Removing n term from denominator in (6):
 \begin{align*}
 \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 & = \sum_{i=1}^{n}x_i^2 - 2n\bar{x}^2 + n\bar{x}^2 \\ %1
 & = \sum_{i=1}^{n}x_i^2 - 2\bar{x}n\bar{x} + n\bar{x}^2 \\ %2
-n\bar{x} = \sum_{1=1}^{n}x_i \\ %3
+n\bar{x} = \sum_{i=1}^{n}x_i \\ %3
 % \bar{x} \xrightarrow{} \sum_{i=1}^{n}x_i \\
 & = \sum_{i=1}^{n}x_i^2 - 2\bar{x}\sum_{i=1}^{n}x_i + n\bar{x}^2 \\
 & = \sum_{i=1}^{n}x_i^2 - \sum_{i=1}^{n}2x_i\bar{x} + n\bar{x}^2 \\
