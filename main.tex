@@ -230,7 +230,7 @@ The Second Derivative Test is indeterminate if:
 $$
 \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0 
 $$
-
+Returning to the forms:
 \begin{gather*}
 \frac{\partial f}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0 \\
  -2\sum_{i=1}^{n}y_i  + 2\sum_{i=1}^{n}\hat{\beta_{0}} + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i  = 0 \\
@@ -238,12 +238,29 @@ $$
  -2\sum_{i=1}^{n}x_i y_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 = 0 \\
 %\frac{\partial f}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
 \end{gather*}
-and obtain:
+we obtain the second order partial derivatives:
 \begin{gather*}
-\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} = \\
-\frac{\partial^2f}{\partial \hat{\beta}_{1}^2} = \\
-\frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}} = \\
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} = 2n \\
+\frac{\partial^2f}{\partial \hat{\beta}_{1}^2} = 2\sum_{i=1}^{n}x_i^2 \\
+\frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}} = 2\sum_{i=1}^{n}x_i \\
 \end{gather*}
+\begin{align*}
+    \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 & = (2n)\cdot\Bigg(2\sum_{i=1}^{n}x_i^2\Bigg)-\Bigg(2\sum_{i=1}^{n}x_i\Bigg)^2 \\
+    & = (2n)\cdot\Bigg(2\sum_{i=1}^{n}x_i\sum_{i=1}^{n}x_i\Bigg)-\Bigg(2\sum_{i=1}^{n}x_i\Bigg)^2 \\
+    & = (2n)\cdot\Bigg(2\sum_{i=1}^{n}x_i\sum_{i=1}^{n}x_i\Bigg)-\Bigg(2\sum_{i=1}^{n}x_{i}2\sum_{i=1}^{n}x_i\Bigg) \\    
+    & = (2n)\cdot(2n\bar{x}n\bar{x})-(2n\bar{x}2n\bar{x}) \\  
+    & = (2n)\cdot(2n\bar{x}n\bar{x})-(4n^2\bar{x}^2) \\      
+    & = (2n)\cdot(2n^2\bar{x}^2)-(4n^2\bar{x}^2) \\   
+    & = 4n^3\bar{x}^2-4n^2\bar{x}^2 \\  
+\end{align*}
+Since:
+\begin{gather*}
+n > 0 \\
+4n^3\bar{x}^2 > 4n^2\bar{x}^2 \\
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 > 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} > 0
+\end{gather*}
+the point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local minimum.
+
 
 
 
