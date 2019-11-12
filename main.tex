@@ -209,11 +209,27 @@ glmfit([2 4 10], [75 45 35]) % coefficient estimates
    74.2308
    -4.2308
 \end{verbatim}
-
-% TODO compute second derivative test - are critical points a local maximum, minimum, saddle point or undefined?
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECOND DERIVATIVE TEST %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Second Derivative Test}
 
-To find out if $\hat{\beta_0}$ and $\hat{\beta_1}$ is a local minimum, local maximum, a saddle point or cannot be defined, we need to compute the second order partial derivatives, and the mixed second order partial derivative of the error function with respect to  $\hat{\beta_0}$ and $\hat{\beta_1}$:
+To find out if $\hat{\beta_0}$ and $\hat{\beta_1}$ is a local minimum, local maximum, a saddle point or cannot be defined, we need to compute the second order partial derivatives, and the mixed second order partial derivative of the error function with respect to  $\hat{\beta_0}$ and $\hat{\beta_1}$. The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local minimum if:
+$$
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 > 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} > 0
+$$
+The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local maximum if:
+$$
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} > 0
+$$
+The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a saddle if:
+$$
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 = 0 
+$$
+The Second Derivative Test is indeterminate if:
+$$
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0 
+$$
 
 \begin{gather*}
 \frac{\partial f}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0 \\
@@ -222,10 +238,12 @@ To find out if $\hat{\beta_0}$ and $\hat{\beta_1}$ is a local minimum, local max
  -2\sum_{i=1}^{n}x_i y_i + 2\sum_{i=1}^{n}\hat{\beta_{0}}x_i + 2\sum_{i=1}^{n}\hat{\beta_{1}}x_i^2 = 0 \\
 %\frac{\partial f}{\partial \hat{\beta_0}}SSE(\hat{\beta_0}, \hat{\beta_1}) = 0
 \end{gather*}
-Second order partial derivative with respect to $\hat{\beta_0}$:
-%$$
-%\frac{\partial^2f}{}
-%$$
+and obtain:
+\begin{gather*}
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} = \\
+\frac{\partial^2f}{\partial \hat{\beta}_{1}^2} = \\
+\frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}} = \\
+\end{gather*}
 
 
 
