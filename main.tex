@@ -209,26 +209,26 @@ glmfit([2 4 10], [75 45 35]) % coefficient estimates
    74.2308
    -4.2308
 \end{verbatim}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECOND DERIVATIVE TEST %
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Second Derivative Test}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECOND PARTIAL DERIVATIVE TEST %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Second Partial Derivative Test}
 
-To find out if $\hat{\beta_0}$ and $\hat{\beta_1}$ is a local minimum, local maximum, a saddle point or cannot be defined, we need to compute the second order partial derivatives, and the mixed second order partial derivative of the error function with respect to  $\hat{\beta_0}$ and $\hat{\beta_1}$. The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local minimum if:
+To find out if $\hat{\beta_0}$ and $\hat{\beta_1}$ is a local minimum, local maximum, a saddle point or cannot be determined, we need to compute the second order partial derivatives, and the mixed second order partial derivative of the error function with respect to  $\hat{\beta_0}$ and $\hat{\beta_1}$. The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local minimum if:
 $$
 \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 > 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} > 0
 $$
 The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a local maximum if:
 $$
-\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} > 0
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 > 0  \quad \textrm{and} \quad \frac{\partial^2f}{\partial \hat{\beta}_{0}^2} < 0
 $$
 The point $(\hat{\beta_{0}}, \hat{\beta_{1}})$ is a saddle if:
 $$
-\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 = 0 
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0 
 $$
 The Second Derivative Test is indeterminate if:
 $$
-\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 < 0 
+\frac{\partial^2f}{\partial \hat{\beta}_{0}^2} \cdot \frac{\partial^2f}{\partial \hat{\beta}_{1}^2} - \Bigg( \frac{\partial^2f}{\partial \hat{\beta}_{0} \hat{\beta}_{1}}\Bigg)^2 = 0 
 $$
 Returning to the forms:
 \begin{gather*}
